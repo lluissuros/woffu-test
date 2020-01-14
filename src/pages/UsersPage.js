@@ -13,13 +13,13 @@ const UsersPage = () => {
   }, []);
 
   const handleGetUsers = () => {
+    setHasError(false);
     const onGetUsersSucces = usersResponse => {
-      console.log("succes");
-      setHasError(false);
+      console.log("success!!");
       setUsers(usersResponse);
     };
-    const onGetUsersError = () => {
-      console.log("error!!!");
+    const onGetUsersError = e => {
+      console.error("error!!!", e.message);
       setHasError(true);
     };
     getUsers(onGetUsersSucces, onGetUsersError);
