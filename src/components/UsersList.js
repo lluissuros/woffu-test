@@ -15,6 +15,7 @@ const HeaderRow = styled(Row)`
   background-color: ${props => props.theme.headerRowColor};
   box-shadow: 0 2px 4px 0 rgba(12, 0, 51, 0.05);
   font-size: 14px;
+  margin-bottom: 10px;
 `;
 
 const UsersList = ({ users }) => {
