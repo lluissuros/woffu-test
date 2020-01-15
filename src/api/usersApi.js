@@ -17,7 +17,12 @@ export async function getUsers(onSuccessCb, onErrorCb) {
     });
     const formattedResponse = users.data.map(user => ({
       ...user,
-      EmployeeStartDate: new Date(user.EmployeeStartDate)
+      EmployeeStartDate: new Date(user.EmployeeStartDate),
+      percentVacation:
+        parseFloat(user.AllocatedDays) === 0
+          ? "0"
+          : (100 * parseFloat(user.AccumulatedDays)) /
+            parseFloat(user.AllocatedDays)
     }));
     onSuccessCb(formattedResponse);
   } catch (e) {

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { ClipLoader } from "react-spinners";
+import { css } from "@emotion/core";
 
 import { getUsers } from "../api/usersApi";
 import ErrorResetButton from "../components/ErrorResetButton";
@@ -12,6 +14,12 @@ const MainContainer = styled.main`
   margin: auto;
   margin-top: 37px;
   box-shadow: 0 2px 4px 0 rgba(12, 0, 51, 0.1);
+`;
+
+const spinnerStyle = css`
+  display: block;
+  margin: 0 auto;
+  border-color: #2c7fe2;
 `;
 
 const UsersPage = () => {
@@ -35,7 +43,7 @@ const UsersPage = () => {
 
   return (
     <MainContainer>
-      {!users && !hasError && <div>LOADING...</div>}
+      {!users && !hasError && <ClipLoader css={spinnerStyle} size={250} />}
       {hasError && (
         <ErrorResetButton
           message={"Error, click to try again"}

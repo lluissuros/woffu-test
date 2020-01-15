@@ -1,5 +1,6 @@
 import React from "react";
 import Img from "react-image";
+import { Line } from "rc-progress";
 import styled from "styled-components";
 
 const UserInfo = styled.div`
@@ -46,7 +47,17 @@ const UserItem = ({ ...user }) => {
         <div>{`${user.FirstName} ${user.LastName}`}</div>
       </UserInfo>
       <IdInfo>{user.UserId}</IdInfo>
-      <VacationsInfo>{` ${user.AllocatedDays} / ${user.AccumulatedDays}`}</VacationsInfo>
+      <VacationsInfo>
+        <Line
+          percent={user.percentVacation}
+          strokeWidth="10"
+          trailWidth="10"
+          strokeColor="#2C7FE2"
+          trailColor="#ECEDF2"
+          strokeLinecap="square"
+          style={{ width: "150px" }}
+        />
+      </VacationsInfo>
       <DateInfo>{formatDate(user.EmployeeStartDate)}</DateInfo>
     </React.Fragment>
   );
