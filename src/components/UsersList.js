@@ -1,46 +1,45 @@
 import React from "react";
 import styled from "styled-components";
+import DirectionSelector from "./DirectionSelector";
+import UserItem from "./UserItem";
 
 const Row = styled.div`
   display: flex;
   justify-content: space-between;
   height: 38px;
-
-  div:nth-child(1) {
-    background: red;
-    flex-grow: 3;
-  }
-  div:nth-child(2) {
-    background: yellow;
-    flex-grow: 1;
-  }
-  div:nth-child(3) {
-    background: blue;
-    flex-grow: 3;
-  }
-  div:nth-child(4) {
-    background: green;
-    flex-grow: 3;
-  }
+  padding-left: 20px;
+  text-align: center;
 `;
 
 const HeaderRow = styled(Row)`
   background-color: ${props => props.theme.headerRowColor};
   box-shadow: 0 2px 4px 0 rgba(12, 0, 51, 0.05);
+  font-size: 14px;
 `;
 
-const UsersList = ({ userName = "Name Missing" }) => {
+const UsersList = ({ users }) => {
   //order by goes here, so we need a first row with title
 
   return (
     <section>
       <HeaderRow>
-        <div>hello</div>
-        <div>hello</div>
-        <div>hello</div>
-        <div>hello</div>
+        <DirectionSelector
+          flexGrow={3}
+          text={"Informacion Personal"}
+        ></DirectionSelector>
+        <DirectionSelector flexGrow={1} text={"ID"}></DirectionSelector>
+        <DirectionSelector flexGrow={3} text={"Vacaciones"}></DirectionSelector>
+        <DirectionSelector
+          flexGrow={3}
+          text={"Fecha de incorporacion a la empresa"}
+        ></DirectionSelector>
       </HeaderRow>
-      <ul>list here</ul>
+
+      {users.map(user => (
+        <Row>
+          <UserItem {...user} />
+        </Row>
+      ))}
     </section>
   );
 };
