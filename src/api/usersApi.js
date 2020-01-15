@@ -15,7 +15,7 @@ export async function getUsers(onSuccessCb, onErrorCb) {
         password: DANGEROUSLY_HARDCODED_PASSWORD
       }
     });
-    onSuccessCb(response);
+    onSuccessCb(response.data);
   } catch (e) {
     onErrorCb(e);
   }

@@ -3,6 +3,16 @@ import styled from "styled-components";
 
 import { getUsers } from "../api/usersApi";
 import ErrorResetButton from "../components/ErrorResetButton";
+import UsersList from "../components/UsersList";
+
+const MainContainer = styled.main`
+  background: ${props => props.theme.white};
+  padding: 8px;
+  width: 90%;
+  margin: auto;
+  margin-top: 37px;
+  box-shadow: 0 2px 4px 0 rgba(12, 0, 51, 0.1);
+`;
 
 const UsersPage = () => {
   const [hasError, setHasError] = useState(false);
@@ -14,19 +24,17 @@ const UsersPage = () => {
 
   const handleGetUsers = () => {
     setHasError(false);
-    const onGetUsersSucces = usersResponse => {
-      console.log("success!!");
+    const onGetUsersSuccesCb = usersResponse => {
       setUsers(usersResponse);
     };
-    const onGetUsersError = e => {
-      console.error("error!!!", e.message);
+    const onGetUsersErrorCb = e => {
       setHasError(true);
     };
-    getUsers(onGetUsersSucces, onGetUsersError);
+    getUsers(onGetUsersSuccesCb, onGetUsersErrorCb);
   };
 
   return (
-    <React.Fragment>
+    <MainContainer>
       {!users && !hasError && <div>LOADING...</div>}
       {hasError && (
         <ErrorResetButton
@@ -34,8 +42,9 @@ const UsersPage = () => {
           onClick={handleGetUsers}
         />
       )}
-      {users && <section>{JSON.stringify(users)}</section>}
-    </React.Fragment>
+      {/* calendar filter selector */}
+      {users && <UsersList users={users} />}
+    </MainContainer>
   );
 };
 

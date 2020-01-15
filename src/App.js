@@ -4,32 +4,29 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import UsersPage from "./pages/UsersPage";
 
 const palette = {
-  //colors from https://clrs.cc/
-  darkBlue: "#001f3f",
-  black: "#111111",
-  green: "#2ECC40",
-  red: "#FF4136",
-  yellow: "#FFDC00"
+  lightgrey: "#F3F2F7",
+  mediumGrey: "#f9f9fb",
+  darkgrey: "#617892",
+  white: "#FFFFFF"
 };
 
 const theme = {
-  primaryColor: palette.green,
-  secondaryColor: palette.red,
-  darkBackgroundColor: palette.darkBlue,
-  defaultFontColor: palette.yellow
+  backgroundColor: palette.lightgrey,
+  headerRowColor: palette.mediumGrey,
+  defaultFontColor: palette.darkgrey,
+  white: palette.white
 };
 
 const GlobalStyle = createGlobalStyle`
     html {
-        background: ${props => props.theme.darkBackgroundColor};
+        background: ${props => props.theme.backgroundColor};
         display: flex;
     }
     body {
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans,
+        font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen-Sans,
         Ubuntu, Cantarell, Helvetica Neue, sans-serif;
         margin: auto;
-        text-align: center;
-        transition: background-color 1s;
+        width: 100%;
         color: ${props => props.theme.defaultFontColor}
     }
   `;
