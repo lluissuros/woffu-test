@@ -20,13 +20,13 @@ const DateInfo = styled.div`
 `;
 
 const UserItem = ({ ...user }) => {
-  console.log(user);
-
-  const formatDate = date => {
-    const formattedDate = new Date(date).toDateString();
-    const [, month, day, year] = formattedDate.split(" ");
-    return [day, month, year].join("/");
-  };
+  const formatDate = date => `
+  ${date.toLocaleDateString("en-US", {
+    day: "numeric"
+  })}/${date.toLocaleDateString("en-US", {
+    month: "2-digit"
+  })}/${date.toLocaleDateString("en-US", { year: "numeric" })}
+  `;
 
   return (
     <React.Fragment>
@@ -40,7 +40,7 @@ const UserItem = ({ ...user }) => {
           }}
           src={[
             user.ImageURL,
-            "https://via.placeholder.com/36/FFBD4C/FFFFFF?Text=DL"
+            `https://via.placeholder.com/36/FFBD4C/000000?text=${user.Acronym}`
           ]}
         />
         <div>{`${user.FirstName} ${user.LastName}`}</div>

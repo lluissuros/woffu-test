@@ -9,13 +9,17 @@ const DANGEROUSLY_HARDCODED_PASSWORD = "";
 
 export async function getUsers(onSuccessCb, onErrorCb) {
   try {
-    const response = await axios.get(GET_USERS_URL, {
+    const users = await axios.get(GET_USERS_URL, {
       auth: {
         username: DANGEROUSLY_HARDCODED_USERNAME,
         password: DANGEROUSLY_HARDCODED_PASSWORD
       }
     });
-    onSuccessCb(response.data);
+    const formattedResponse = users.data.map(user => ({
+      ...user,
+      EmployeeStartDate: new Date(user.EmployeeStartDate)
+    }));
+    onSuccessCb(formattedResponse);
   } catch (e) {
     onErrorCb(e);
   }

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { getUsers } from "../api/usersApi";
 import ErrorResetButton from "../components/ErrorResetButton";
-import UsersList from "../components/UsersList";
+import UsersTable from "../components/UsersTable";
 
 const MainContainer = styled.main`
   background: ${props => props.theme.white};
@@ -43,7 +43,7 @@ const UsersPage = () => {
         />
       )}
       {/* calendar filter selector */}
-      {users && <UsersList users={users} />}
+      {users && <UsersTable users={users} />}
     </MainContainer>
   );
 };

@@ -18,7 +18,7 @@ const HeaderRow = styled(Row)`
   margin-bottom: 10px;
 `;
 
-const UsersList = ({ users }) => {
+const UsersTable = ({ users }) => {
   //order by goes here, so we need a first row with title
 
   return (
@@ -37,7 +37,7 @@ const UsersList = ({ users }) => {
       </HeaderRow>
 
       {users.map(user => (
-        <Row>
+        <Row key={user.UserId}>
           <UserItem {...user} />
         </Row>
       ))}
@@ -45,4 +45,4 @@ const UsersList = ({ users }) => {
   );
 };
 
-export default UsersList;
+export default UsersTable;
