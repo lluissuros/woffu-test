@@ -4,12 +4,8 @@ import styled from "styled-components";
 const DirectionSelector = ({
   text = "missing",
   flexGrow = 1,
-  onClickAscending = () => {
-    console.log("missing callback");
-  },
-  onClickDescending = () => {
-    console.log("missing callback");
-  }
+  onClickAscending = () => {},
+  onClickDescending = () => {}
 }) => {
   const Container = styled.div`
     flex: ${props => props.flexGrow};

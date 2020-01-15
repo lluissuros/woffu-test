@@ -4,16 +4,16 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import UsersPage from "./pages/UsersPage";
 
 const palette = {
-  lightgrey: "#F3F2F7",
+  lightGrey: "#F3F2F7",
   mediumGrey: "#f9f9fb",
-  darkgrey: "#617892",
+  darkGrey: "#617892",
   white: "#FFFFFF"
 };
 
 const theme = {
-  backgroundColor: palette.lightgrey,
+  backgroundColor: palette.lightGrey,
   headerRowColor: palette.mediumGrey,
-  defaultFontColor: palette.darkgrey,
+  defaultFontColor: palette.darkGrey,
   white: palette.white
 };
 

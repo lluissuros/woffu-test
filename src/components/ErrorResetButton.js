@@ -9,10 +9,8 @@ const ErrorButton = styled.button`
 `;
 
 const ErrorResetButton = ({
-  message = "error message TODO",
-  onClick = () => {
-    console.log("missing click callback");
-  }
+  message = " message TODO",
+  onClick = () => {}
 }) => {
   return <ErrorButton onClick={onClick}>{message}</ErrorButton>;
 };

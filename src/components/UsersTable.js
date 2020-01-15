@@ -1,15 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import DirectionSelector from "./DirectionSelector";
 import UserItem from "./UserItem";
-
-const Row = styled.article`
-  display: flex;
-  justify-content: space-between;
-  height: 38px;
-  padding-left: 20px;
-  text-align: center;
-`;
+import { Row } from "./SharedStyledComponents";
 
 const HeaderRow = styled(Row)`
   background-color: ${props => props.theme.headerRowColor};
@@ -20,6 +13,10 @@ const HeaderRow = styled(Row)`
 
 const UsersTable = ({ users }) => {
   const [sortedUsers, setSortedUsers] = useState(users);
+
+  useEffect(() => {
+    setSortedUsers(users);
+  }, [users]);
 
   const sortBy = (sortField, ascending) => {
     const sortedUsers = users.sort((a, b) => {

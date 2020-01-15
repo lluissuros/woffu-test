@@ -6,11 +6,13 @@ import { css } from "@emotion/core";
 import { getUsers } from "../api/usersApi";
 import ErrorResetButton from "../components/ErrorResetButton";
 import UsersTable from "../components/UsersTable";
+import CalendarSelector from "../components/CalendarSelector";
 
 const MainContainer = styled.main`
   background: ${props => props.theme.white};
   padding: 8px;
   width: 90%;
+  max-width: 1100px;
   margin: auto;
   margin-top: 37px;
   box-shadow: 0 2px 4px 0 rgba(12, 0, 51, 0.1);
@@ -25,6 +27,7 @@ const spinnerStyle = css`
 const UsersPage = () => {
   const [hasError, setHasError] = useState(false);
   const [users, setUsers] = useState(null);
+  const [filteredUsers, setFilteredUsers] = useState(null);
 
   useEffect(() => {
     handleGetUsers();
@@ -34,11 +37,20 @@ const UsersPage = () => {
     setHasError(false);
     const onGetUsersSuccesCb = usersResponse => {
       setUsers(usersResponse);
+      setFilteredUsers(usersResponse);
     };
     const onGetUsersErrorCb = e => {
       setHasError(true);
     };
     getUsers(onGetUsersSuccesCb, onGetUsersErrorCb);
+  };
+
+  const filterByDates = (startDate, endDate) => {
+    const filteredUsers = users.filter(
+      user =>
+        user.EmployeeStartDate > startDate && user.EmployeeStartDate < endDate
+    );
+    setFilteredUsers(filteredUsers);
   };
 
   return (
@@ -50,8 +62,12 @@ const UsersPage = () => {
           onClick={handleGetUsers}
         />
       )}
-      {/* calendar filter selector */}
-      {users && <UsersTable users={users} />}
+      <CalendarSelector
+        onSelectedDates={(startDate, endDate) =>
+          filterByDates(startDate, endDate)
+        }
+      />
+      {filteredUsers && <UsersTable users={filteredUsers} />}
     </MainContainer>
   );
 };
