@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import DirectionSelector from "./DirectionSelector";
 import UserItem from "./UserItem";
@@ -19,7 +19,24 @@ const HeaderRow = styled(Row)`
 `;
 
 const UsersTable = ({ users }) => {
-  //order by goes here, so we need a first row with title
+  const [sortedUsers, setSortedUsers] = useState(users);
+
+  const sortBy = (sortField, ascending) => {
+    const sortedUsers = users.sort((a, b) => {
+      if (a[sortField] > b[sortField]) {
+        return 1;
+      }
+      if (b[sortField] > a[sortField]) {
+        return -1;
+      }
+      return 0;
+    });
+    if (ascending) {
+      setSortedUsers(sortedUsers);
+    } else {
+      setSortedUsers([...sortedUsers].reverse());
+    }
+  };
 
   return (
     <section>
@@ -27,16 +44,46 @@ const UsersTable = ({ users }) => {
         <DirectionSelector
           flexGrow={3}
           text={"Informacion Personal"}
+          onClickAscending={() => {
+            sortBy("FirstName", true);
+          }}
+          onClickDescending={() => {
+            sortBy("FirstName", false);
+          }}
         ></DirectionSelector>
-        <DirectionSelector flexGrow={1} text={"ID"}></DirectionSelector>
-        <DirectionSelector flexGrow={3} text={"Vacaciones"}></DirectionSelector>
+        <DirectionSelector
+          flexGrow={1}
+          text={"ID"}
+          onClickAscending={() => {
+            sortBy("UserId", true);
+          }}
+          onClickDescending={() => {
+            sortBy("UserId", false);
+          }}
+        ></DirectionSelector>
+        <DirectionSelector
+          flexGrow={3}
+          text={"Vacaciones"}
+          onClickAscending={() => {
+            sortBy("percentVacation", true);
+          }}
+          onClickDescending={() => {
+            sortBy("percentVacation", false);
+          }}
+        ></DirectionSelector>
         <DirectionSelector
           flexGrow={3}
           text={"Fecha de incorporacion a la empresa"}
+          onClickAscending={() => {
+            sortBy("EmployeeStartDate", true);
+          }}
+          onClickDescending={() => {
+            sortBy("EmployeeStartDate", false);
+          }}
         ></DirectionSelector>
       </HeaderRow>
 
-      {users.map(user => (
+      {sortedUsers.map(user => (
         <Row key={user.UserId}>
           <UserItem {...user} />
         </Row>
