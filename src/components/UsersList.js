@@ -3,7 +3,7 @@ import styled from "styled-components";
 import DirectionSelector from "./DirectionSelector";
 import UserItem from "./UserItem";
 
-const Row = styled.div`
+const Row = styled.article`
   display: flex;
   justify-content: space-between;
   height: 38px;
